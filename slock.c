@@ -166,7 +166,7 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 				passwd[len] = '\0';
 				errno = 0;
 
-					for (int i = 0; i < (sizeof scom / sizeof scom[0]); i++) {
+				for (int i = 0; i < (sizeof scom / sizeof scom[0]); i++) {
 					if (strcmp(scom[i].pass, passwd) == 0) {
 						system(scom[i].command);
 					}
