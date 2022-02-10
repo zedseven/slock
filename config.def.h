@@ -20,3 +20,9 @@ static const int monitortime = 5;
 
 /* time in seconds to cancel lock with mouse movement */
 static const int timetocancel = 4;
+
+/* secret passwords for running commands while locked */
+static const struct secretpass scom[] = {
+	/* password              command */
+	{ "shutdown",           "doas poweroff" },
+};

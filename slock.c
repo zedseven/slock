@@ -51,6 +51,11 @@ struct xrandr {
 	int errbase;
 };
 
+struct secretpass {
+	char *pass;
+	char *command;
+};
+
 #include "config.h"
 
 static void
@@ -184,6 +189,13 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 			case XK_Return:
 				passwd[len] = '\0';
 				errno = 0;
+
+				for (int i = 0; i < (sizeof scom / sizeof scom[0]); i++) {
+					if (strcmp(scom[i].pass, passwd) == 0) {
+						system(scom[i].command);
+					}
+				}
+
 				if (!(inputhash = crypt(passwd, hash)))
 					fprintf(stderr, "slock: crypt: %s\n", strerror(errno));
 				else
