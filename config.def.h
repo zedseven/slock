@@ -10,3 +10,9 @@ static const char *colorname[NUMCOLS] = {
 
 /* treat a cleared input like a wrong password (color) */
 static const int failonclear = 1;
+
+/* secret passwords for running commands while locked */
+static const struct secretpass scom[] = {
+	/* password              command */
+	{ "shutdown",           "doas poweroff" },
+};
