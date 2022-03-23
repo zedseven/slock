@@ -20,6 +20,8 @@ static const int monitortime = 5;
 
 /* time in seconds to cancel lock with mouse movement */
 static const int timetocancel = 4;
+/* whether quick-cancel is enabled by default (the `-c` flag flips this) */
+static const int quickcancelenabledbydefault = 1;
 
 /* secret passwords for running commands while locked */
 static const struct secretpass scom[] = {

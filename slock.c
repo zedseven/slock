@@ -58,6 +58,8 @@ struct secretpass {
 
 #include "config.h"
 
+static int quickcancelenabled = quickcancelenabledbydefault;
+
 static void
 die(const char *errstr, ...)
 {
@@ -157,7 +159,8 @@ readpw(Display *dpy, struct xrandr *rr, struct lock **locks, int nscreens,
 		caps = indicators & 1;
 
 	while (running && !XNextEvent(dpy, &ev)) {
-		running = !((time(NULL) - locktime < timetocancel) && (ev.type == MotionNotify));
+		if (quickcancelenabled)
+			running = !((time(NULL) - locktime < timetocancel) && (ev.type == MotionNotify));
 		if (ev.type == KeyPress) {
 			explicit_bzero(&buf, sizeof(buf));
 			num = XLookupString(&ev.xkey, buf, sizeof(buf), &ksym, 0);
@@ -341,7 +344,7 @@ lockscreen(Display *dpy, struct xrandr *rr, int screen)
 static void
 usage(void)
 {
-	die("usage: slock [-v] [cmd [arg ...]]\n");
+	die("usage: slock [-cv] [cmd [arg ...]]\n");
 }
 
 int
@@ -358,6 +361,9 @@ main(int argc, char **argv) {
 	CARD16 standby, suspend, off;
 
 	ARGBEGIN {
+	case 'c':
+		quickcancelenabled = !quickcancelenabledbydefault;
+		break;
 	case 'v':
 		fprintf(stderr, "slock-"VERSION"\n");
 		return 0;
