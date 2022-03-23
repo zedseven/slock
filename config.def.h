@@ -13,3 +13,5 @@ static const int failonclear = 1;
 
 /* time in seconds to cancel lock with mouse movement */
 static const int timetocancel = 4;
+/* whether quick-cancel is enabled by default (the `-c` flag flips this) */
+static const int quickcancelenabledbydefault = 1;
