@@ -365,7 +365,7 @@ main(int argc, char **argv) {
 		quickcancelenabled = !quickcancelenabledbydefault;
 		break;
 	case 'v':
-		fprintf(stderr, "slock-"VERSION"\n");
+		puts("slock-"VERSION);
 		return 0;
 	default:
 		usage();
